@@ -20,7 +20,7 @@ jobs:
     - name: Install Podman
       run: |
         apt-get update
-        apt-get install -y podman
+        apt-get install -y podman ca-certificates
 
     # - name: Configure Podman
     #   run: |
