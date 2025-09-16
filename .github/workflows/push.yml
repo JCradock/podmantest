@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ubuntu:22.04
-    #   options: --privileged
+      options: --privileged
 
     steps:
     - name: Checkout code
