@@ -1,0 +1,37 @@
+name: Build with Podman
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:22.04
+    #   options: --privileged
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
+
+    - name: Install Podman
+      run: |
+        apt-get update
+        apt-get install -y podman
+
+    # - name: Configure Podman
+    #   run: |
+    #     # Configure Podman for container environment
+    #     mkdir -p ~/.config/containers
+    #     echo "rootless = false" >> ~/.config/containers/containers.conf
+
+    - name: Build image with Podman
+      run: |
+        podman build -t podmantest:latest .
+
+    - name: List built images
+      run: |
+        podman images
