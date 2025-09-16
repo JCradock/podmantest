@@ -40,7 +40,7 @@ jobs:
 
     - name: Build image with Podman
       run: |
-        podman build --cgroup-manager=cgroupfs --isolation=chroot --network=host -t podmantest:latest --platform linux/amd64 --timestamp 0 .
+        podman build --cgroup-manager=cgroupfs --isolation=chroot -t podmantest:latest --platform linux/amd64 --timestamp 0 .
 
 
     - name: List built images
