@@ -47,9 +47,19 @@ jobs:
         nslookup google.com || echo "DNS lookup failed"
         echo "=== End Network Debug ==="
 
+    - name: Debug Podman environment
+      run: |
+        echo "=== Podman Debug Info ==="
+        podman version
+        podman info
+        echo "=== Build Context ==="
+        ls -la
+        cat Dockerfile
+        echo "=== End Debug ==="
+
     - name: Build image with Podman
       run: |
-        podman build --cgroup-manager=cgroupfs --isolation=chroot --network=host -t podmantest:latest --platform linux/amd64 --timestamp 0 .
+        podman build --cgroup-manager=cgroupfs --isolation=chroot --network=host --log-level=debug -t podmantest:latest --platform linux/amd64 --timestamp 0 .
 
     - name: List built images
       run: |
