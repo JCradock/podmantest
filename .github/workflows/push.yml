@@ -44,7 +44,7 @@ jobs:
         ip route show
         cat /etc/resolv.conf
         echo "=== Testing HTTP connectivity ==="
-        curl -I --connect-timeout 5 https://httpbin.org/status/200 || echo "HTTP test failed"
+        curl -I --connect-timeout 5 https://www.google.com || echo "HTTP test failed"
         echo "=== Testing DNS resolution ==="
         nslookup google.com || echo "DNS lookup failed"
         echo "=== Testing HTTPS connectivity ==="
@@ -62,9 +62,9 @@ jobs:
     - name: Test container network connectivity
       run: |
         echo "=== Testing Container HTTP with Podman ==="
-        podman run --rm --cgroup-manager=cgroupfs --network=host podmantest:latest wget -q --spider https://httpbin.org/status/200 && echo "Podman HTTP test passed" || echo "Podman HTTP test failed"
+        podman run --rm --cgroup-manager=cgroupfs --network=host podmantest:latest wget -q --spider https://www.google.com && echo "Podman HTTP test passed" || echo "Podman HTTP test failed"
         echo "=== Testing Container HTTP with Docker ==="
-        docker run --rm --network=host podmantest:latest wget -q --spider https://httpbin.org/status/200 && echo "Docker HTTP test passed" || echo "Docker HTTP test failed"
+        docker run --rm --network=host podmantest:latest wget -q --spider https://www.google.com && echo "Docker HTTP test passed" || echo "Docker HTTP test failed"
         echo "=== Testing Simple Container Execution ==="
         podman run --rm podmantest:latest echo "Podman container executed successfully" || echo "Podman simple test failed"
         docker run --rm podmantest:latest echo "Docker container executed successfully" || echo "Docker simple test failed"
