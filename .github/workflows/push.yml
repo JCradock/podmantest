@@ -20,7 +20,7 @@ jobs:
     - name: Install Podman and Docker
       run: |
         apt-get update
-        apt-get install -y podman ca-certificates iproute2 net-tools dnsutils docker.io
+        apt-get install -y podman ca-certificates iproute2 net-tools dnsutils docker.io iputils-ping
 
     - name: Configure Podman
       run: |
