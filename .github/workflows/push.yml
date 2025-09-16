@@ -30,7 +30,7 @@ jobs:
 
     - name: Build image with Podman
       run: |
-        podman build -t podmantest:latest .
+        podman build -t podmantest:latest --platform linux/amd64 --timestamp 0 .
 
     - name: List built images
       run: |
