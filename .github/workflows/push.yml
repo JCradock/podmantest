@@ -57,9 +57,22 @@ jobs:
         cat Dockerfile
         echo "=== End Debug ==="
 
+    - name: Test simple Podman pull
+      run: |
+        echo "=== Testing Podman Pull ==="
+        podman pull alpine:3
+        podman images
+        echo "=== End Pull Test ==="
+
     - name: Build image with Podman
       run: |
-        podman build --cgroup-manager=cgroupfs --isolation=chroot --network=host --log-level=debug -t podmantest:latest --platform linux/amd64 --timestamp 0 .
+        podman build --cgroup-manager=cgroupfs --isolation=chroot --network=host -t podmantest:latest --platform linux/amd64 --timestamp 0 .
+
+    - name: Test container network connectivity
+      run: |
+        echo "=== Testing Container Network ==="
+        podman run --rm --network=host podmantest:latest ping -c 3 8.8.8.8
+        echo "=== Network test completed ==="
 
     - name: List built images
       run: |
