@@ -22,25 +22,25 @@ jobs:
         apt-get update
         apt-get install -y podman ca-certificates
 
-    - name: Configure Podman
-      run: |
-        # Configure Podman for container environment
-        mkdir -p ~/.config/containers
-        cat > ~/.config/containers/containers.conf << EOF
-        [containers]
-        cgroup_manager = "cgroupfs"
-        events_logger = "file"
-        [engine]
-        cgroup_manager = "cgroupfs"
-        events_logger = "file"
-        [network]
-        network_backend = "netavark"
-        default_rootless_network_cmd = "slirp4netns"
-        EOF
+    # - name: Configure Podman
+    #   run: |
+    #     # Configure Podman for container environment
+    #     mkdir -p ~/.config/containers
+    #     cat > ~/.config/containers/containers.conf << EOF
+    #     [containers]
+    #     cgroup_manager = "cgroupfs"
+    #     events_logger = "file"
+    #     [engine]
+    #     cgroup_manager = "cgroupfs"
+    #     events_logger = "file"
+    #     [network]
+    #     network_backend = "netavark"
+    #     default_rootless_network_cmd = "slirp4netns"
+    #     EOF
 
     - name: Build image with Podman
       run: |
-        podman build --cgroup-manager=cgroupfs --isolation=chroot -t podmantest:latest --platform linux/amd64 --timestamp 0 .
+        podman build -t podmantest:latest --platform linux/amd64 --timestamp 0 .
 
 
     - name: List built images
